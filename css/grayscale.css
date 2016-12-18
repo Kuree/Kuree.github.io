@@ -138,9 +138,11 @@ a:focus {
     padding: 100px 0;
     text-align: center;
     color: #fff;
+    background: url(/img/keyi.jpg) no-repeat bottom center scroll;
     background-color: #000;
     -webkit-background-size: cover;
     -moz-background-size: cover;
+    -webkit-filter: grayscale(200%);
     background-size: cover;
     -o-background-size: cover;
 }
