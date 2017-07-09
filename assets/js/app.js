@@ -74,6 +74,12 @@ const Blogs = {
             }, response => {
                 this.$parent.error_http();
             });
+        },
+        convertDate(date){
+            var year = Math.floor(date / 10000).toString();
+            var month = Math.floor((date % 10000) / 100).toString();
+            var day = (date % 100).toString();
+            return month + "/" + day + "/" + year;
         }
     }
 }

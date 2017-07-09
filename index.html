@@ -229,7 +229,7 @@
             <md-layout md-row v-for="entry in blogs" :key="entry.date">
                 <md-layout md-flex-xsmall="10" md-flex-medium="20" md-flex-large="20" md-flex-xlarge="20"></md-layout>
                 <md-layout md-flex="false" md-flex-xsmall="80" md-flex-medium="60" md-flex-large="60" md-flex-xlarge="60">
-                    <md-card>
+                    <md-card class="blog-post-card">
                         <md-card-media v-if="entry.img">
                             <img :src="entry.img" :alt="entry.img_alt">
                         </md-card-media>
@@ -239,7 +239,10 @@
                         </md-card-header>
 
                         <md-card-content>
+                            <p>{{convertDate(entry.date)}}</p>
+                            <p>
                             {{entry.abstract}}...
+                            <p></p>
                         </md-card-content>
 
                         <md-card-actions>

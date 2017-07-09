@@ -47,6 +47,10 @@ a {
 .blog-post {
     width: 80%;
 }
+.blog-post-card{
+    width: 100%;
+    margin-bottom: 3vh;
+}
 .chat-form {
     width: 100%;
 }
@@ -104,7 +108,7 @@ a {
     top: calc(60px + 76px);
     margin-left: 10%;
     max-height: calc(100% - 76px - 60px);
-    overflow: scroll;
+    overflow: auto;
 }
 #chatbox-input i {
     color: #9C27B0;
@@ -135,9 +139,8 @@ a {
     }
 }
 /* chat box 
-            adapted from https://codepen.io/blaketarter/pen/emWbYm
-        */
-
+adapted from https://codepen.io/blaketarter/pen/emWbYm
+*/
 .message-wrapper {
     position: relative;
     overflow: hidden;
