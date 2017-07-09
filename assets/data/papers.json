@@ -1,0 +1,47 @@
+[
+  {
+    "date": 201503,
+    "name": "Extending Semantic Sensor Networks with QueryML",
+    "author": "Keyi Zhang and Alan Marchiori",
+    "vendor": "IEEE",
+    "conf": "2015 IEEE International Conference on Pervasive Computing and Communications Work in Progress",
+    "pdf": "Percom_Wip_15_QueryML.pdf",
+    "type": "workshop"
+  },
+  {
+    "date": 201603,
+    "name": "Natural Language Search of Sensor Data",
+    "author": "Keyi Zhang and Alan Marchiori",
+    "vendor": "IEEE",
+    "conf": "The Thirteenth IEEE International Workshop on Managing Ubiquitous Communications and Services",
+    "pdf": "Percom_2016_Workshop_Nl_SSN.pdf",
+    "type": "workshop"
+  },
+  {
+    "date": 201610,
+    "name": "A passive multi-channel synchronization solution for IoT",
+    "author": "Keyi Zhang",
+    "vendor": "ACM",
+    "conf": "The Eighth ACM Wireless of the Students, by the Students,and for the Students Workshop (ACM S3)",
+    "pdf": "ACM_2016_S3.pdf",
+    "type": "workshop"
+  },
+  {
+    "date": 201703,
+    "name": "Crowdsourcing Low-Power Wide-Area IoT Networks",
+    "author": "Keyi Zhang and Alan Marchiori",
+    "vendor": "IEEE",
+    "conf": "15th IEEE International Conference on Pervasive Computing and Communications (PerCom)",
+    "pdf": "PerCom_2017.pdf",
+    "type": "conference"
+  },
+  {
+    "date": 201704,
+    "name": "PlanIt and DQ-N for Low-Power Wide-Area Networks: Demo Abstract",
+    "author": "Keyi Zhang and Alan Marchiori",
+    "vendor": "ACM",
+    "conf": "Second International Conference on Internet-of-Things Design and Implementation",
+    "pdf": "IOTDI_Demo.pdf",
+    "type": "poster/demo"
+  }
+]
