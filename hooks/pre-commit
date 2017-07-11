@@ -1,0 +1,11 @@
+#!/bin/sh
+
+SCRIPT_PATH=scripts/blog.py
+ENV_PATH=scripts/env
+PYTHON=$ENV_PATH/bin/python
+
+ROOT_DIR=$(git rev-parse --show-toplevel)
+
+# use the env to process markdown
+$PYTHON $ROOT_DIR/$SCRIPT_PATH
+
