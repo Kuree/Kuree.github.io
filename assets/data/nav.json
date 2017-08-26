@@ -31,7 +31,7 @@
     "name": "CV",
     "icon": "picture_as_pdf",
     "index": 4,
-    "route": "/pdf/CV.pdf",
+    "route": "assets/pdf/CV.pdf",
     "nav": false,
     "external": true
   }
