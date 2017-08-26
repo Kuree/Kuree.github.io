@@ -223,7 +223,8 @@ new Vue({
             "email_domain": "keyizhang.com",
             "linkedin": "https://www.linkedin.com/in/keyizhang/",
             "github": "https://github.com/Kuree",
-            "api_ai_token": "049d579a5be5446db4367fde4730a579"
+            "api_ai_token": "049d579a5be5446db4367fde4730a579",
+            "use_default_blog": false
 
         },
         "nav": null,

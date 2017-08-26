@@ -61,11 +61,16 @@
                     <md-icon>menu</md-icon>
                 </md-button>
                 <h2 class="md-title" style="flex: 1">{{profile.name}}</h2>
-                <router-link v-for="item in nav" :key="item.index" :to="item.route" v-if="item.nav">
+                <router-link v-for="item in nav" :key="item.index" :to="item.route" v-if="item.nav && ((item.name === 'Blog' && profile.use_default_blog) || item.name !== 'Blog')">
                     <md-button class="nav-btn">
                         {{item.name}}
                     </md-button>
                 </router-link>
+                <a href="/blog" v-if="!profile.use_default_blog">
+                    <md-button class="nav-btn">
+                        Blog
+                    </md-button>
+                </a>
             </md-toolbar>
             <md-sidenav class="md-left" ref="leftSidenav">
                 <md-toolbar class="md-large">
@@ -84,14 +89,36 @@
                 </md-toolbar>
                 <md-list>
                     <div class="sidenav-btn" v-for="item in nav" :key="item.index" v-if="item.external !== true">
-                        <router-link :to="item.route">
-                            <md-button class="sidenav-btn">
-                                <md-list-item>
-                                    <md-icon>{{item.icon}}</md-icon>
-                                    <span>{{item.name}}</span>
-                                </md-list-item>
-                            </md-button>
-                        </router-link>
+                        <div v-if="item.name != 'Blog'">
+                            <router-link :to="item.route">
+                                <md-button class="sidenav-btn">
+                                    <md-list-item>
+                                        <md-icon>{{item.icon}}</md-icon>
+                                        <span>{{item.name}}</span>
+                                    </md-list-item>
+                                </md-button>
+                            </router-link>
+                        </div>
+                        <div v-else-if="profile.user_default_blog">
+                             <router-link :to="item.route">
+                                <md-button class="sidenav-btn">
+                                    <md-list-item>
+                                        <md-icon>{{item.icon}}</md-icon>
+                                        <span>{{item.name}}</span>
+                                    </md-list-item>
+                                </md-button>
+                            </router-link>
+                        </div>
+                        <div v-else>
+                            <a target="_blank" href="/blog">
+                                <md-button class="sidenav-btn">
+                                    <md-list-item>
+                                        <md-icon>{{item.icon}}</md-icon>
+                                        <span>{{item.name}}</span>
+                                    </md-list-item>
+                                </md-button>
+                            </a>
+                        </div>
                     </div>
                     <div v-else>
                         <a target="_blank" :href="item.route">
@@ -137,10 +164,10 @@
             <router-view></router-view>
             <md-layout class="nav-bottom-bar">
                 <md-bottom-bar>
-                    <md-bottom-bar-item v-for="(item, index) in nav" :key="item.index" @click="jumpPage(item.route, index)" :id="'btn-' + index" :md-icon="item.icon" v-if="item.route !== active_path && item.nav">
+                    <md-bottom-bar-item v-for="(item, index) in nav" :key="item.index" @click="jumpPage(item.route, index)" :id="'btn-' + index" :md-icon="item.icon" v-if="item.route !== active_path && item.nav && item.name != 'Blog'">
                         {{item.name}}
                     </md-bottom-bar-item>
-                    <md-bottom-bar-item @click="jumpPage(item.route)" :id="'btn-' + index" :md-icon="item.icon" md-active v-else-if="item.nav">
+                    <md-bottom-bar-item @click="jumpPage(item.route)" :id="'btn-' + index" :md-icon="item.icon" md-active v-else-if="item.nav && item.name != 'Blog'">
                         {{item.name}}
                     </md-bottom-bar-item>
                 </md-bottom-bar>
