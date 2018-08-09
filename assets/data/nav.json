@@ -14,23 +14,16 @@
     "nav": true
   },
   {
-    "name": "Timeline",
-    "icon": "timeline",
-    "index": 2,
-    "route": "/timeline",
-    "nav": true
-  },
-  {
     "name": "Blog",
     "icon": "folder",
-    "index": 3,
+    "index": 2,
     "route": "/blog",
     "nav": true
   },
   {
     "name": "CV",
     "icon": "picture_as_pdf",
-    "index": 4,
+    "index": 3,
     "route": "assets/pdf/CV.pdf",
     "nav": false,
     "external": true
