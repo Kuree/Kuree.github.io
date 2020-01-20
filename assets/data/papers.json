@@ -43,5 +43,14 @@
     "conf": "Second International Conference on Internet-of-Things Design and Implementation",
     "pdf": "IOTDI_Demo.pdf",
     "type": "poster/demo"
+  },
+  {
+    "date": 201911,
+    "name": "Online Model Distillation for Efficient Video Inference",
+    "author": "Ravi Teja Mullapudi, Steven Chen, Keyi Zhang, Deva Ramanan, and Kayvon Fatahalian",
+    "vendor": "IEEE",
+    "conf": "International Conference on Computer Vision",
+    "pdf": "https://arxiv.org/abs/1812.02699",
+    "type": "conference"
   }
 ]

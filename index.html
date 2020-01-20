@@ -201,8 +201,8 @@
         <div class="publication-container">
             <md-layout md-gutter>
                 <md-layout md-flex="60" md-flex-offset="20">
-                    <md-layout :md-gutter="8">
-                        <md-layout md-flex-xsmall="100" md-flex-large="50" v-for="paper in papers" :key="paper.index">
+                    <md-layout :md-gutter="4" class="md-alignment-top-center">
+                        <div class="paper-box" v-for="paper in papers" :key="paper.index">
                             <md-card md-with-hover :style="{ margin: '5%' }">
                                 <div @click="openPDF(paper.pdf)">
                                 <md-card-header>
@@ -216,7 +216,7 @@
                                 </md-card-content>
                                 </div>
                             </md-card>
-                        </md-layout>
+                        </div>
                     </md-layout>
                 </md-layout>
             </md-layout>

@@ -54,6 +54,9 @@ a {
 .chat-form {
     width: 100%;
 }
+.paper-box {
+    width: 50%;
+}
 /* Fix a Vue Material bug */
 
 @media (max-width: 660px) and (min-width: 601px) {

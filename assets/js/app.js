@@ -29,7 +29,11 @@ const Publication = {
             });
         },
         openPDF(pdf){
-            window.open("/assets/pdf/" + pdf, '_blank');
+            if (pdf.includes("http")) {
+                window.open(pdf, '_blank');
+            } else {
+                window.open("/assets/pdf/" + pdf, '_blank');
+            }
         }
     }
 };
