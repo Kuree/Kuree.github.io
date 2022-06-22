@@ -222,7 +222,6 @@ new Vue({
         "profile": {
             "name": "Keyi Zhang",
              "desc": "I am a PhD student in Computer Science at Stanford University, advised by Mark Horowitz. I am currently working on place and route tools for CGRA. I received a B.S. in Computer Science and Engineering from Bucknell University. Besides computer science, I enjoy playing video games and hanging out with friends.",
-            "profile_desc": "Picture with Donald Knuth.",
             "email_user": "hi",
             "email_domain": "keyizhang.com",
             "linkedin": "https://www.linkedin.com/in/keyizhang/",
