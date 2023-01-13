@@ -1,375 +1,98 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 
 <head>
-<script>
-// Single Page Apps for GitHub Pages
-// https://github.com/rafrex/spa-github-pages
-// Copyright (c) 2016 Rafael Pedicini, licensed under the MIT License
-  (function(l) {
-    if (l.search) {
-      var q = {};
-      l.search.slice(1).split('&').forEach(function(v) {
-        var a = v.split('=');
-        q[a[0]] = a.slice(1).join('=').replace(/~and~/g, '&');
-      });
-      if (q.p !== undefined) {
-        window.history.replaceState(null, null,
-          l.pathname.slice(0, -1) + (q.p || '') +
-          (q.q ? ('?' + q.q) : '') +
-          l.hash
-        );
-      }
-    }
-  }(window.location))
-</script>
-<script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "Person",
-  "url": "https://keyizhang.com",
-  "name": "Keyi Zhang",
-  "affiliation": "Stanford University",
-  "jobTitle": "PhD student",
-  "alumniOf": "Bucknell University"
-}
-</script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Keyi's Homepage</title>
+    <meta name="description"
+        content="Keyi Zhang's personal website. It is a collection of his work, experience, and thoughts.">
+    <link rel="canonical" href="https://keyizhang.com">
 
-    <meta name="viewport" content="width=device-width">
-    <meta name="description" content="Keyi Zhang's personal website. It is a collection of his work, experience, and thoughts.">
-    <meta name="google-site-verification" content="quyVOch-718GwQZJWoJXdAQYtJx3B-3a6lQYiZ_ifyo" />  
-  <title>Keyi's Homepage</title>
-    <link async rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
-    <link async rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
-    <link async rel="stylesheet" href="https://use.fontawesome.com/a098e038ec.css">
-    <link rel="stylesheet" href="/assets/css/vue-material.min.css">
-    <link rel="stylesheet" href="/assets/css/app.css">
+    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
-    <div id="loading-bg">
-        <div class="sk-folding-cube">
-            <div class="sk-cube1 sk-cube"></div>
-            <div class="sk-cube2 sk-cube"></div>
-            <div class="sk-cube4 sk-cube"></div>
-            <div class="sk-cube3 sk-cube"></div>
-        </div>
-    </div>
-    <div id="app">
-        <div class="container">
-            <md-toolbar>
-                <md-button class="md-icon-button" @click="toggleLeftSidenav">
-                    <md-icon>menu</md-icon>
-                </md-button>
-                <h2 class="md-title" style="flex: 1">{{profile.name}}</h2>
-                <router-link v-for="item in nav" :key="item.index" :to="item.route" v-if="item.nav && ((item.name === 'Blog' && profile.use_default_blog) || item.name !== 'Blog')">
-                    <md-button class="nav-btn">
-                        {{item.name}}
-                    </md-button>
-                </router-link>
-                <a href="/blog" v-if="!profile.use_default_blog">
-                    <md-button class="nav-btn">
-                        Blog
-                    </md-button>
-                </a>
-            </md-toolbar>
-            <md-sidenav class="md-left" ref="leftSidenav">
-                <md-toolbar class="md-large">
-                    <div class="md-toolbar-container">
-                        <md-layout md-row>
-                            <md-layout md-flex="35">
-                                <md-avatar class="md-large">
-                                    <img src="/assets/img/avatar.jpg" alt="Avatar">
-                                </md-avatar>
-                            </md-layout>
-                            <md-layout md-flex="65" md-align="left">
-                                <h3 class="md-title" text-algin="center" style="margin-top: 10%">{{profile.name}}</h3>
-                            </md-layout>
-                        </md-layout>
-                    </div>
-                </md-toolbar>
-                <md-list>
-                    <div class="sidenav-btn" v-for="item in nav" :key="item.index" v-if="item.external !== true">
-                        <div v-if="item.name != 'Blog'">
-                            <router-link :to="item.route">
-                                <md-button class="sidenav-btn">
-                                    <md-list-item>
-                                        <md-icon>{{item.icon}}</md-icon>
-                                        <span>{{item.name}}</span>
-                                    </md-list-item>
-                                </md-button>
-                            </router-link>
-                        </div>
-                        <div v-else-if="profile.user_default_blog">
-                             <router-link :to="item.route">
-                                <md-button class="sidenav-btn">
-                                    <md-list-item>
-                                        <md-icon>{{item.icon}}</md-icon>
-                                        <span>{{item.name}}</span>
-                                    </md-list-item>
-                                </md-button>
-                            </router-link>
-                        </div>
-                        <div v-else>
-                            <a target="_blank" href="/blog">
-                                <md-button class="sidenav-btn">
-                                    <md-list-item>
-                                        <md-icon>{{item.icon}}</md-icon>
-                                        <span>{{item.name}}</span>
-                                    </md-list-item>
-                                </md-button>
-                            </a>
-                        </div>
-                    </div>
-                    <div v-else>
-                        <a target="_blank" :href="item.route">
-                            <md-button class="sidenav-btn">
-                                <md-list-item>
-                                    <md-icon>{{item.icon}}</md-icon>
-                                    <span>{{item.name}}</span>
-                                </md-list-item>
-                            </md-button>
-                        </a>
-                    </div>
-
-                </md-list>
-            </md-sidenav>
-            <div class="fixed-speed-dial">
-                <md-speed-dial md-open="hover" md-direction="top" class="md-fab-bottom-right">
-                    <md-button class="md-fab" md-fab-trigger>
-                        <md-icon md-icon-morph>add</md-icon>
-                        <md-icon>people</md-icon>
-                    </md-button>
-                    <md-button class="md-fab md-primary md-mini md-clean">
-                        <a :href="'mailto:' + profile.email_user + '@' + profile.email_domain">
-                            <md-icon class="white-icon">email</md-icon>
-                        </a>
-                    </md-button>
-                    <md-button class="md-fab md-primary md-mini md-clean">
-                        <a target="_blank" :href="profile.github">
-                            <md-icon md-iconset="fa fa-github" class="white-icon"></md-icon>
-                        </a>
-                    </md-button>
-                    <md-button class="md-fab md-primary md-mini md-clean">
-                        <a target="_blank" :href="profile.linkedin">
-                            <md-icon class="white-icon" md-iconset="fa fa-linkedin"></md-icon>
-                        </a>
-                    </md-button>
-                    <md-button class="md-fab md-primary md-mini md-clean">
-                        <router-link :to="'/chat'">
-                            <md-icon class="white-icon">chat</md-icon>
-                        </router-link>
-                    </md-button>
-                </md-speed-dial>
-            </div>
-            <router-view></router-view>
-            <md-layout class="nav-bottom-bar">
-                <md-bottom-bar>
-                    <md-bottom-bar-item v-for="(item, index) in nav" :key="item.index" @click="jumpPage(item.route, index)" :id="'btn-' + index" :md-icon="item.icon" v-if="item.route !== active_path && item.nav && item.name != 'Blog'">
-                        {{item.name}}
-                    </md-bottom-bar-item>
-                    <md-bottom-bar-item @click="jumpPage(item.route)" :id="'btn-' + index" :md-icon="item.icon" md-active v-else-if="item.nav && item.name != 'Blog'">
-                        {{item.name}}
-                    </md-bottom-bar-item>
-                </md-bottom-bar>
-            </md-layout>
-        </div>
-    </div>
-
-    <template id="main">
-        <md-layout md-align="left" class="welcome-page" md-vertical-align="center">
-            <md-layout md-flex-xlarge="40" md-flex-large="40" md-flex-medium="40" md-flex-small="90" md-flex-xsmall="90" md-flex-offset="5">
-                <md-card>
-                    <md-card-media>
-                        <img src="/assets/img/profile.jpg" alt="Profile">
-                    </md-card-media>
-                </md-card>
-            </md-layout>
-            <md-layout md-flex-xsmall="5" md-flex-small="5" md-hide-medium-and-up></md-layout>
-            <md-layout md-align="right" md-flex-xlarge="40" md-flex-large="40" md-flex-medium="40" md-flex-small="90" md-flex-xsmall="90" md-flex-offset="5">
-                <h2 class="md-display-2">Hello</h2>
-                <p>{{profile.desc}}</p>
-            </md-layout>
-        </md-layout>
-    </template>
-
-    <template id="publication">
-        <div class="publication-container">
-            <md-layout md-gutter>
-                <md-layout md-flex="60" md-flex-offset="20">
-                    <md-layout :md-gutter="4" class="md-alignment-top-center">
-                        <div class="paper-box" v-for="paper in papers" :key="paper.index">
-                            <md-card md-with-hover :style="{ margin: '5%' }">
-                                <div @click="openPDF(paper.pdf)">
-                                <md-card-header>
-                                    <md-card-header-text>
-                                        <div class="md-title">{{paper.name}}</div>
-                                        <div class="md-subhead">{{paper.author}}</div>
-                                    </md-card-header-text>
-                                </md-card-header>
-                                <md-card-content>
-                                    {{paper.conf}}
-                                </md-card-content>
-                                </div>
-                            </md-card>
-                        </div>
-                    </md-layout>
-                </md-layout>
-            </md-layout>
-        </div>
-    </template>
-
-    <template id="timeline">
-        <md-layout class="timeline-container">
-            <md-layout md-column class="event-column">
-                <md-layout v-for="(event, index) in timeline" :key="event.date">
-                    <md-layout md-flex="40" md-hide-xsmall md-flex-offset="5" md-align="end">
-                        <event-card :event="event" v-if="index % 2">
-                        </event-card>
-                    </md-layout>
-                    <md-layout md-flex="10" md-vertical-align="center" class="event-line-first" v-if="index == 0">
-                        <md-icon>{{event.icon}}</md-icon>
-                    </md-layout>
-                    <md-layout md-flex="10" md-vertical-align="center" class="event-line-last" v-else-if="index == (timeline.length - 1)">
-                        <md-icon>{{event.icon}}</md-icon>
-                    </md-layout>
-                    <md-layout md-flex="10" md-vertical-align="center" class="event-line" v-else>
-                        <md-icon>{{event.icon}}</md-icon>
-                    </md-layout>
-                    <md-layout md-flex="40" md-flex-xsmall="90" v-if="index % 2 == 0">
-                        <event-card :event="event">
-                        </event-card>
-                    </md-layout>
-                    <md-layout md-flex-xsmall md-flex-xsmall="90" md-hide-small-and-up v-if="index % 2 == 1">
-                        <event-card :event="event">
-                        </event-card>
-                    </md-layout>
-                </md-layout>
-            </md-layout>
-        </md-layout>
-    </template>
-
-    <template id="blogs">
-        <md-layout md-column class="blog-column">
-            <md-layout md-row v-for="entry in blogs" :key="entry.date">
-                <md-layout md-flex-xsmall="10" md-flex-medium="20" md-flex-large="20" md-flex-xlarge="20"></md-layout>
-                <md-layout md-flex="false" md-flex-xsmall="80" md-flex-medium="60" md-flex-large="60" md-flex-xlarge="60">
-                    <md-card class="blog-post-card">
-                        <md-card-media v-if="entry.img">
-                            <img :src="entry.img" :alt="entry.img_alt">
-                        </md-card-media>
-
-                        <md-card-header>
-                            <div class="md-title">{{entry.title}}</div>
-                        </md-card-header>
-
-                        <md-card-content>
-                            <p>{{convertDate(entry.date)}}</p>
-                            <p>
-                            {{entry.abstract}}...
-                            <p></p>
-                        </md-card-content>
-
-                        <md-card-actions>
-                            <router-link :to="'/blog/' + entry.id">
-                                <md-button class="md-primary">Read more</md-button>
-                            </router-link>
-                        </md-card-actions>
-                    </md-card>
-                </md-layout>
-            </md-layout>
-        </md-layout>
-    </template>
-
-    <template id="blog-page">
-        <div class="post">
-            <div v-if="post" class="blog-column">
-                <md-layout md-flex-xsmall="70" md-flex-small="70" md-flex-medium="70" md-flex-large="70" md-flex-xlarge="70" md-flex-offset="15">
-                    <md-card class="blog-post">
-                        <md-card-header>
-                            <div class="md-title">{{post.title}}</div>
-                        </md-card-header>
-
-                        <md-card-content>
-                            <div v-html="post.body"></div>
-                        </md-card-content>
-
-                        <md-card-actions>
-                            <router-link :to="'/blog'">
-                                <md-button>Back</md-button>
-                            </router-link>
-                        </md-card-actions>
-                    </md-card>
-                </md-layout>
-            </div>
-        </div>
-    </template>
-
-    <template id="chat-page">
-        <div>
-            <form novalidate v-on:submit.prevent="sendQuery(query)" class="chat-form">
-                <md-input-container>
-                    <md-input placeholder="Ask me something" v-model="query"></md-input>
-                    <a id="chatbox-input" v-on:click="sendQuery(query)" style="text-decoration:none; cursor: pointer">
-                        <md-icon>send</md-icon>
-                    </a>
-                </md-input-container>
-            </form>
-            <div class="chatbox">
-                <div class="message-wrapper block-right" v-for="msg in this.$parent.chat_history" v-if="msg.self" :key="msg.index" :id="'msg-' + msg.index.toString()">
-                    <div class="text-wrapper" :id="'msg-' + msg.index.toString()">{{msg.text}}</div>
+    <main class="container">
+        <section>
+            <div class="grid">
+                <div>
+                    <figure>
+                        <img src="/assets/img/profile.jpg">
+                    </figure>
                 </div>
-                <div class="message-wrapper block-left" :id="'msg-' + msg.index.toString()" v-else>
-                    <div class="text-wrapper">{{msg.text}}</div>
+                <div>
+                    <h1>Keyi Zhang</h1>
+                    <p>
+                        I am a recent PhD graduate in Computer Science from Stanford University, where I was fortunate
+                        enough to be advised by Mark Horowitz.
+                        During my PhD I worked on various software systems for accelerators and my dissertation was on
+                        source-level debugging for hardware generator frameworks.
+                        Personal interests include reverse-engineering random tech stuff, tinkering, and comic books.
+                    </p>
+                    <h2>
+                        <div>
+                            <a href="mailto:hi[at]keyizhang.com" data-tooltip="Email"><i
+                                    class="fa-solid fa-envelope"></i></a>
+                            <a href="https://github.com/Kuree" data-tooltip="Github"><i
+                                    class="fa-brands fa-github"></i></a>
+                            <a href="https://www.linkedin.com/in/keyizhang/" data-tooltip="LinkedIn"><i
+                                    class="fa-brands fa-linkedin"></i></a>
+                            <a href="https://scholar.google.com/citations?user=vBECnX0AAAAJ&hl=en"
+                                data-tooltip="Google Scholar"><i class="fa-solid fa-graduation-cap"></i></a>
+                        </div>
+                    </h2>
+
                 </div>
             </div>
-        </div>
-    </template>
 
-    <template id="event-card">
-        <md-card class="event-card">
-            <md-card-media md-ratio="16:9">
-                <img :src="'/assets/img/events/' + event.img" :alt="event.alt">
-                <md-tooltip md-direction="bottom">Image credit: {{event.img_credit}}</md-tooltip>
-            </md-card-media>
+        </section>
 
-            <md-card-header>
-                <div class="md-title">{{event.title}}</div>
-                <div class="md-subhead">{{event.start_date? Math.floor(event.start_date / 100).toString() + "/" + (event.start_date % 100).toString() + " - " + Math.floor(event.end_date / 100).toString() + "/" + (event.end_date % 100).toString() :Math.floor(event.date / 100).toString() + "/" + (event.date % 100).toString()}}</div>
-            </md-card-header>
+        <section>
+            <h2>Selected publications</h2>
+            <p><b>Bringing Source-Level Debugging Frameworks to Hardware Generators</b>
+                <br>DAC 2022<a href="/assets/pdf/DAC_2022.pdf"><i class="fa-solid fa-file-pdf"></i></a>
+                <br>Keyi Zhang, Zain Asgar, Mark Horowitz
+            </p>
 
-            <md-card-content>
-                {{event.content}}
-            </md-card-content>
-        </md-card>
-    </template>
+            <p><b>A framework for adding low-overhead, fine-grained power domains to CGRAs</b>
+                <br>DATE 2020<a href="/assets/pdf/DATE_2020.pdf"><i class="fa-solid fa-file-pdf"></i></a>
+                <br>Ankita Nayak, Keyi Zhang, Raj Setaluri, Alex Carsello, Makai Mann, Stephen Richardson, Rick Bahr,
+                Pat Hanrahan, Mark Horowitz, Priyanka Raina
+            </p>
 
-    <template id="error_page">
-        <div>
-            <md-layout md-column class="error-page">
-                <md-layout md-flex="60" md-flex-offset="20">
-                    <span class="md-display-2">Oops!</span>
-                </md-layout>
-                <md-layout md-flex="60" md-flex-offset="20">
-                    <p class="md-title">Something went wrong. Maybe try again later? You can also chat with my AI by clicking
-                        <router-link :to="'/chat'">here</router-link>.</p>
-                </md-layout>
-                <md-layout md-flex="60" md-flex-offset="20">
-                    <div class="message-wrapper block-right">
-                        <div id="msg-0" class="text-wrapper">Hello there!</div>
-                    </div>
-                    <div class="message-wrapper block-left">
-                        <div class="text-wrapper">General Kenobi.</div>
-                    </div>
-                </md-layout>
-            </md-layout>
-        </div>
-    </template>
+            <p><b>Crowdsourcing low-power wide-area IoT networks</b>
+                <br>PerCom 2017<a href="/assets/pdf/PerCom_2017.pdf"><i class="fa-solid fa-file-pdf"></i></a>
+                <br>Keyi Zhang, Alan Marchiori
+            </p>
+        </section>
+
+        <section>
+            <h2>Awards</h2>
+
+            <p>
+                <b>Apple PhD Fellowship in Integrated Systems</b><br>Apple<br>2021
+            </p>
+            <p>
+                <b>Outstanding Undergraduate Researchers Runner-Up</b><br>Computing Research Association (CRA) <br>2016
+            </p>
+
+        </section>
+    </main>
 </body>
 
-<script src="/assets/js/vue.min.js"></script>
-<script src="/assets/js/vue-router.min.js"></script>
-<script src="/assets/js/vue-material.min.js"></script>
-<script src="/assets/js/vue-resource.min.js"></script>
-<script src="/assets/js/app.js"></script>
+<style>
+    a,
+    a:hover,
+    a:visited,
+    a:active {
+        color: inherit;
+        text-decoration: none;
+        padding: 8px
+    }
+</style>
+
 </html>
